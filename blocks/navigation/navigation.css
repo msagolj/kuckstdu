@@ -7,3 +7,8 @@
   padding-right: 100px;
   margin: 20px;
 }
+
+.navigation.block .navlinks .previous, .navigation.block .navlinks .next  {
+
+  white-space: nowrap;
+}

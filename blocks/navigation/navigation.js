@@ -6,10 +6,10 @@ export default function decorate(block) {
   const dom = document.createRange().createContextualFragment(`
     <div class='navlinks'>
       <div class='previous'>
-      :nextarrow:
+      <span class='icon icon-previousarrow'></span>
       </div>
       <div class='next'>
-      :previousarrow:
+      <span class='icon icon-nextarrow'></span>
       </div>
     </div>
   `)
@@ -19,7 +19,7 @@ export default function decorate(block) {
   }
     
   if (links[1]) {
-    dom.querySelector('.next').append(links[1]);
+    dom.querySelector('.next').prepend(links[1]);
   }
 
   block.append(dom);

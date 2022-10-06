@@ -20,10 +20,15 @@
   --heading-font-family: var(--body-font-family);
 }
 
+html {
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 
   margin:0;
   background-color: var(--background-color);
