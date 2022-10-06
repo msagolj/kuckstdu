@@ -2,30 +2,20 @@ import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
 
-  const links = block.querySelectorAll('a');
-
-  block.textContent = '';
+  block.children[0].classList = 'navlinks';
+  block.children[0].children[0].classList = 'previous';
+  block.children[0].children[1].classList = 'next';
   
-  const dom = document.createRange().createContextualFragment(`
-    <div class='navlinks'>
-      <div class='previous'>
-      <span class='icon icon-previousarrow'></span>
-      </div>
-      <div class='next'>
-      <span class='icon icon-nextarrow'></span>
-      </div>
-    </div>
-  `)
+  const leftarrow = document.createElement('span');
+  leftarrow.classList = 'icon icon-previousarrow';
 
-  if (links[0]) {
-    dom.querySelector('.previous').append(links[0]);
-  }
-    
-  if (links[1]) {
-    dom.querySelector('.next').prepend(links[1]);
-  }
+  const rightarrow = document.createElement('span');
+  rightarrow.classList = 'icon icon-nextarrow';
 
-  block.append(dom);
+  const links = block.querySelectorAll('a');
+  links[0].prepend(leftarrow);
+  links[1].append(rightarrow);
+
   decorateIcons(block);
   console.log(block)
 }

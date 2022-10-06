@@ -1,3 +1,7 @@
+.navigation.block {
+  padding-top:50px;
+}
+
 .navigation.block .navlinks {
   display: flex;
   flex-direction: row;
@@ -9,13 +13,28 @@
 }
 
 .navigation.block .navlinks .previous, .navigation.block .navlinks .next  {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
   font-size: 1rem;
+  color: darkslategray;
 }
 
 .navigation.block .navlinks  .icon svg  {
   width: 20px;
+  fill:currentColor;
 }
+
+.navigation.block .navlinks a {
+  display:flex;
+  text-decoration: none;
+  color: darkslategray;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+.navigation.block .navlinks  a:visited {
+  text-decoration: none;
+  color: darkslategray;
+
+}
+
