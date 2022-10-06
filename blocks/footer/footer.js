@@ -6,14 +6,10 @@ import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
  */
 
 export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
+
   block.textContent = '';
 
-  const footerPath = cfg.footer || '/footer';
-  const resp = await fetch(`${footerPath}.plain.html`);
+  const resp = await fetch(`/footer.plain.html`);
   const html = await resp.text();
-  const footer = document.createElement('div');
-  footer.innerHTML = html;
-  await decorateIcons(footer);
-  block.append(footer);
+  block.innerHTML = html;
 }

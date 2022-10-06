@@ -12,8 +12,8 @@
 
  :root {
   /* colors */
-  --background-color: rgb(38,38,38);
-  --text-color: #ffffff;
+  --background-color: #ffffff;
+  --text-color: darkgrey;
 
   /* fonts */
   --body-font-family: helvetica, sans-serif;
@@ -44,28 +44,19 @@ main {
   display: flex;
   flex-direction:column;
   flex: 1 1 auto;
+  height: 1fr;
   align-items: stretch;
+  color: black;
   
 }
 
 footer {
   flex: 0 0 auto;
-}
-
-.default-content-wrapper p {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.25rem;
-  white-space: nowrap;
+  border-bottom: solid 2px white;
 }
 
 .default-content-wrapper h1 {
-  background-color: rgb(102,102,94) ;
-  text-transform: uppercase;
   text-align: center;
-  font-size: 50px;
-  font-weight: 100;
-  padding: 33px 0px 33px 0px;
-  margin: 0;
+  font-size: 1.25rem;
+  white-space: nowrap;
 }

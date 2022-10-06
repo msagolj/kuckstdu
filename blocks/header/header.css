@@ -1,35 +1,18 @@
 /* fix header section to the top */
-header {
-
-}
-
-.header.block {
+header .header.block > div {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap:50px;
   padding: 10px 200px 10px 200px;
-  background-color: var(--background-color);
+  background-color: darkslategray;
   border-bottom: solid 2px white;
-
 }
 
-.header.block nav a {
-  font-size: 1.25rem;
-  text-decoration: none;
-  color: white;
-  font-weight: 100;
-  font-family: var(--body-font-family);
-  white-space:nowrap;
-}
-
-.header.block nav ul {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  font-family: var(--body-font-family);
-  list-style: none;
+.header.block img {
+  inline-size :300px;
+  block-size: auto;
 }
 
 
