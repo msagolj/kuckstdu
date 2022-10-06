@@ -1,0 +1,10 @@
+- you cant override / replace the main block ?
+- the default hero block interfers if you want to create your own hero block/different layout
+- google docs: switch on pageless view
+- use google doc gliederung to navigate quickly
+- white logo not visible
+- does not reload when editing css
+- developing content and code in parallel a bit confusing, need 
+to publish content changes to make it visible
+- how do i see if i had javascript errors
+- if you rename the activated page stays there like a zombie

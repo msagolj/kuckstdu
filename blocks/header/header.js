@@ -1,66 +1,43 @@
 import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
 
 /**
- * collapses all open nav sections
- * @param {Element} sections The container element
- */
-
-function collapseAllNavSections(sections) {
-  sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', 'false');
-  });
-}
-
-/**
- * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
-
 export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
+  
   block.textContent = '';
 
-  // fetch nav content
-  const navPath = cfg.nav || '/nav';
-  const resp = await fetch(`${navPath}.plain.html`);
-  if (resp.ok) {
-    const html = await resp.text();
+  // get header content from extra page
+  // actually its only the logo , nav is dynamic
+  const resp = await fetch(`/header.plain.html`);
+  const html = await resp.text();
+  // get the picture element
+  const picture = document.createRange()
+    .createContextualFragment(html).querySelector('picture');
+ 
+  const dom = document.createRange().createContextualFragment(`
+    <div class='logo'>
+    </div>
+    <div class='nav'>
+      <nav>
+        <ul>
+        </ul>
+      </nav>
+    </div>
+  `)
 
-    // decorate nav DOM
-    const nav = document.createElement('nav');
-    nav.innerHTML = html;
-    decorateIcons(nav);
+  dom.querySelector('.logo').append(picture);
+  const ul = dom.querySelector('ul');
 
-    const classes = ['brand', 'sections', 'tools'];
-    classes.forEach((e, j) => {
-      const section = nav.children[j];
-      if (section) section.classList.add(`nav-${e}`);
-    });
+  document.querySelectorAll('h1').forEach((elem, i) => {
+    const title = elem.innerHTML;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.setAttribute('href',"#" + title.toLowerCase());
+    a.innerHTML = title;
+    li.append(a);
+    ul.append(li);
+  })
 
-    const navSections = [...nav.children][1];
-    if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          collapseAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        });
-      });
-    }
-
-    // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
-    hamburger.addEventListener('click', () => {
-      const expanded = nav.getAttribute('aria-expanded') === 'true';
-      document.body.style.overflowY = expanded ? '' : 'hidden';
-      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    nav.prepend(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
-    decorateIcons(nav);
-    block.append(nav);
-  }
+  block.append(dom);
 }
