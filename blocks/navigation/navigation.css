@@ -1,3 +1,8 @@
+.navigation-wrapper {
+  flex: 0 0 auto;
+  margin-block-start: auto;
+}
+
 .navigation.block {
   padding-top:50px;
 }

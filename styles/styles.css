@@ -46,13 +46,14 @@ header {
 }
 
 main {
+  flex: 1 1 auto;
+  color: black;  
+}
+
+main > div {
   display: flex;
   flex-direction:column;
-  flex: 1 1 auto;
-  height: 1fr;
-  align-items: stretch;
-  color: black;
-  
+  justify-content: end;
 }
 
 footer {
