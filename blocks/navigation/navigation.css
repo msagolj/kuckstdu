@@ -9,6 +9,12 @@
 }
 
 .navigation.block .navlinks .previous, .navigation.block .navlinks .next  {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
 
-  white-space: nowrap;
+.navigation.block .navlinks  .icon svg  {
+  width: 40px;
 }
