@@ -1,5 +1,5 @@
-/* fix header section to the top */
-header .header.block > div {
+/* -- header section */
+header .header.block {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -13,6 +13,116 @@ header .header.block > div {
 .header.block img {
   inline-size :300px;
   block-size: auto;
+}
+
+/* HAMBURGER MENU */
+/* hide the input checkbox */
+#hamburger-toggle {
+opacity: 0;
+position: absolute;
+}
+
+/* label containing the 3 stripes */
+.hamburger-button-label {
+  position: fixed;
+  top: 10px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  opacity: 0%;
+  transition: opacity 1s;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* blend label in when mouse hovers over it */
+.hamburger-button-label:hover, #hamburger-toggle:checked ~ .hamburger-button-label {
+  opacity: 100%;
+}
+
+/* style the 3 stripes */
+.hamburger-button-label span {
+  display: block;
+  background-color: black;
+  width: 100%;
+  height: 3px;
+  margin-bottom: 8px;
+  opacity: 100%;
+  transition-duration: .5s;
+}
+
+/* animate the 1st stripe */
+#hamburger-toggle:checked + .hamburger-button-label > span:nth-child(1) {
+  transform: rotate(45deg) translateY(15px);
+}
+
+/* fade 2nd stripe out */
+#hamburger-toggle:checked + .hamburger-button-label > span:nth-child(2) {
+  opacity : 0%;
+  transform: translateX(20px);
+}
+
+/* animate 3rd stripe */
+#hamburger-toggle:checked + .hamburger-button-label > span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-15px);
+}
+
+/* the navigation menu */
+.hamburger-nav {
+  position: fixed;
+  left:0;
+  top: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content:start;
+  align-items: flex-start;
+
+  block-size: 100vh;
+  box-sizing: border-box;
+
+  padding-top:40px;
+  background-color:darkgray;
+  border-end-end-radius: 20px;
+  border-start-end-radius: 20px;
+  opacity: 90%;
+}
+
+/* slide the menu in/out */
+#hamburger-toggle:checked ~ .hamburger-nav {
+  transform: translateX(0%);
+}
+
+/* -- the navigation entries */
+.hamburger-nav ul {
+  list-style-type: disc;
+}
+
+.hamburger-nav li {
+  transform: translateX(-100%);
+  transition-duration: 1s;
+}
+
+.hamburger-nav li::marker {
+  color: black;
+}
+
+.hamburger-nav a {
+  display:inline-block;
+  padding: 15px 20px 0px 0px;
+  color: black;
+}
+
+/* make nav entries slide in/out */
+#hamburger-toggle:checked ~ .hamburger-nav li {
+  transform: translateX(0%);
+}
+
+/* nav entry matches current page*/
+.hamburger-nav .active {
+  font-weight: bold;
 }
 
 

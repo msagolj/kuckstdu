@@ -17,5 +17,4 @@ export default function decorate(block) {
   links[1].append(rightarrow);
 
   decorateIcons(block);
-  console.log(block)
 }
