@@ -1,4 +1,5 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
+export let prev = {};
+export let next = {};
 
 /**
  * @param {Element} block The header block element
@@ -26,17 +27,30 @@ export default async function decorate(block) {
     </div>   
   `)
 
-  // add the nav entries to dom
-  const navlist = domHamburger.querySelector('.hamburger-nav');
-  // add class to active entry
-  domSlides.querySelector(`a[href='${document.location.pathname}']`).classList = 'active';
-  navlist.append(domSlides);
-
-
+  // fill in list of slides
+  domHamburger.querySelector('.hamburger-nav').append(domSlides);
   // add the hamburger menu
   block.append(domHamburger);
   // add the logo
   block.append(domLogo);
   // add the title
   block.append(domTitle);
+
+  const slides = domSlides.querySelectorAll(`a`);
+  await (() => {
+    for(var i = 0 ; i < slides.length; ++i){
+      let e = slides[i];
+      if (e.getAttribute('href') === document.location.pathname) {
+        e.classList = 'active';  
+        next.href = slides[i+1].getAttribute('href');
+        next.title = slides[i+1].innerText;
+        break;
+      } else {
+        prev.href = e.getAttribute('href');
+        prev.title = e.innerHTML;
+      }
+    }
+  })();
+  console.log(prev.title);
+  console.log(next);
 }

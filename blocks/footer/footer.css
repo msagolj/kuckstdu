@@ -1,6 +1,45 @@
 footer {
   background-color: darkslategray;
 }
+/* -- center content -- */
 footer p {
-   text-align: center;
+  text-align: center;
+  color: white;
+}
+
+footer .footernav   {
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+}
+
+footer .footernav .prev {
+  font-size: 1.2rem;
+  padding: 10px;
+}
+footer .footernav .footertext {
+  font-size: 1.2rem;
+  padding: 10px;
+  inline-size: 100%;
+}
+footer .footernav .next {
+  font-size: 1.2rem;
+  padding: 10px;
+  
+}
+
+footer .footernav .icon svg  {
+  width: 20px;
+  fill:currentColor;
+}
+
+footer .footernav a  {
+  display:flex;
+  text-decoration: none;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
 }
