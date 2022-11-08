@@ -8,7 +8,7 @@ export default async function decorate(block) {
 
   // get header content from common header document
   if (!document.headerContent) {
-    document.headerContent = fetch(`/header.plain.html`).then(response => response.text());
+    document.headerContent = fetch(`./header.plain.html`).then(response => response.text());
   }
 
   const domHeader = document.createRange().createContextualFragment(await document.headerContent);

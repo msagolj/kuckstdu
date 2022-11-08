@@ -11,12 +11,12 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // get footer text for center section
-  const resp = await fetch(`/footer.plain.html`);
+  const resp = await fetch(`./footer.plain.html`);
   const html = await resp.text();
 
   // get header content from common header document
   if (!document.headerContent) {
-    document.headerContent = fetch(`/header.plain.html`).then(response => response.text());
+    document.headerContent = fetch(`./header.plain.html`).then(response => response.text());
   }
 
   // get the list of links
