@@ -7,7 +7,11 @@ export let next = {};
 export default async function decorate(block) {
 
   // get header content from common header document
-  const domHeader = document.createRange().createContextualFragment((await (await fetch(`/header.plain.html`)).text()));
+  if (!document.headerContent) {
+    document.headerContent = fetch(`/header.plain.html`).then(response => response.text());
+  }
+
+  const domHeader = document.createRange().createContextualFragment(await document.headerContent);
   // get the logo
   const domLogo = domHeader.querySelector('picture');
   // get the main title
@@ -29,28 +33,12 @@ export default async function decorate(block) {
 
   // fill in list of slides
   domHamburger.querySelector('.hamburger-nav').append(domSlides);
+  // mark active page
+  domHamburger.querySelector(`[href='${document.location.pathname}']`).classList ='active';
   // add the hamburger menu
   block.append(domHamburger);
   // add the logo
   block.append(domLogo);
   // add the title
   block.append(domTitle);
-
-  const slides = domSlides.querySelectorAll(`a`);
-  await (() => {
-    for(var i = 0 ; i < slides.length; ++i){
-      let e = slides[i];
-      if (e.getAttribute('href') === document.location.pathname) {
-        e.classList = 'active';  
-        next.href = slides[i+1].getAttribute('href');
-        next.title = slides[i+1].innerText;
-        break;
-      } else {
-        prev.href = e.getAttribute('href');
-        prev.title = e.innerHTML;
-      }
-    }
-  })();
-  console.log(prev.title);
-  console.log(next);
 }

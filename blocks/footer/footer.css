@@ -15,15 +15,19 @@ footer .footernav   {
 }
 
 footer .footernav .prev {
+  width:33%;
   font-size: 1.2rem;
   padding: 10px;
 }
 footer .footernav .footertext {
+  width:33%;
   font-size: 1.2rem;
   padding: 10px;
   inline-size: 100%;
 }
 footer .footernav .next {
+  width:33%;
+  flex: 1 1 auto;
   font-size: 1.2rem;
   padding: 10px;
   
@@ -38,8 +42,15 @@ footer .footernav a  {
   display:flex;
   text-decoration: none;
   color: white;
-  justify-content: center;
-  align-items: center;
+  align-items: left;
   gap: 10px;
   white-space: nowrap;
+}
+
+footer .footernav .prev a {
+  justify-content: left;
+}
+
+footer .footernav .next a {
+  justify-content: right;
 }
