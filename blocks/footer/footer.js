@@ -10,37 +10,35 @@ export default async function decorate(block) {
 
   block.textContent = '';
 
-  // get footer text for center section
-  const resp = await fetch(`./footer.plain.html`);
+  // get center text
+  const resp = await fetch(`/footer.plain.html`);
   const html = await resp.text();
-
   // get header content from common header document
   if (!document.headerContent) {
-    document.headerContent = fetch(`./header.plain.html`).then(response => response.text());
+    document.headerContent = await (await fetch(`./header.plain.html`)).text();
+    console.log('Footer:initialized headerContent');
+  } else {
+    console.log('Footer:found headerContent')
   }
 
-  // get the list of links
-  const slides = document.createRange().createContextualFragment(await document.headerContent)
-    .querySelector('ul').querySelectorAll(`a`);
-
-  // find previous and next link if valid
-  for(var i = 0 ; i < slides.length; ++i){
-    let e = slides[i];
-    if (e.getAttribute('href') === document.location.pathname) {
-      // get next link if there is one
-      if( i+1 < slides.length){
-      next.href = slides[i+1].getAttribute('href');
-      next.title = slides[i+1].innerText;
+  const slides = document.createRange().createContextualFragment(document.headerContent).querySelector('ul').querySelectorAll(`a`);
+  await (() => {
+    for(var i = 0 ; i < slides.length; ++i){
+      let e = slides[i];
+      if (e.getAttribute('href') === document.location.pathname) {
+        if( i+1 < slides.length){
+        console.log(i)
+        next.href = slides[i+1].getAttribute('href');
+        next.title = slides[i+1].innerText;
+        }
+        break;
+      } else {
+        prev.href = e.getAttribute('href');
+        prev.title = e.innerHTML;
       }
-      break;
-    } else {
-      // store as most recent previous link
-      prev.href = e.getAttribute('href');
-      prev.title = e.innerHTML;
     }
-  }
-
-  // build footer dom
+  })();
+  
   const dom = document.createRange().createContextualFragment(`
     <div class='footernav'>
       <div class='prev'>
@@ -52,8 +50,7 @@ export default async function decorate(block) {
       </div>
     </div>
   `);
-  // add dom
+  
   block.append(dom);
-  // generate icons
   decorateIcons(block);
 }
