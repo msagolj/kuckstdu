@@ -1,5 +1,4 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
-import { next,prev } from '../header/header.js';
+import { decorateIcons } from '../../scripts/scripts.js';
 
 /**
  * loads and decorates the footer
@@ -11,34 +10,43 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // get center text
-  const resp = await fetch(`/footer.plain.html`);
+  const resp = await fetch(`./footer.plain.html`);
   const html = await resp.text();
-  // get header content from common header document
+
+  // get header content from common header document, if not already loaded by header block
   if (!document.headerContent) {
-    document.headerContent = await (await fetch(`./header.plain.html`)).text();
-    console.log('Footer:initialized headerContent');
-  } else {
-    console.log('Footer:found headerContent')
+    // make it a promise
+    document.headerContent =fetch('./header.plain.html').then(response => response.text());
   }
 
-  const slides = document.createRange().createContextualFragment(document.headerContent).querySelector('ul').querySelectorAll(`a`);
-  await (() => {
-    for(var i = 0 ; i < slides.length; ++i){
-      let e = slides[i];
-      if (e.getAttribute('href') === document.location.pathname) {
-        if( i+1 < slides.length){
-        console.log(i)
-        next.href = slides[i+1].getAttribute('href');
-        next.title = slides[i+1].innerText;
-        }
-        break;
-      } else {
-        prev.href = e.getAttribute('href');
-        prev.title = e.innerHTML;
-      }
-    }
-  })();
+  // get the dom, wait for promise 
+  const slides = document.createRange().createContextualFragment(await document.headerContent)
+    .querySelector('ul').querySelectorAll(`a`);
   
+  // info about previous/next link
+  let prev = {};
+  let next = {};
+
+  // go through list of slides
+  for(var i = 0 ; i < slides.length; ++i){
+    let e = slides[i];
+    // if its this is the slide currently shown
+    if (e.getAttribute('href') === document.location.pathname) {
+      // .. if there is a follow up page
+      if( i+1 < slides.length){
+        // store info about next link
+        next['href'] = slides[i+1].getAttribute('href');
+        next.title = slides[i+1].innerText;
+      }
+      break;
+    } else {
+      // this becomes the must current prev page
+      prev.href = e.getAttribute('href');
+      prev.title = e.innerHTML;
+    }
+  }
+
+  // build the dom for the footer section
   const dom = document.createRange().createContextualFragment(`
     <div class='footernav'>
       <div class='prev'>
@@ -51,6 +59,8 @@ export default async function decorate(block) {
     </div>
   `);
   
+  // add dom
   block.append(dom);
+  // convert arrow icons to svg
   decorateIcons(block);
 }

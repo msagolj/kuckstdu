@@ -1,16 +1,15 @@
-export let prev = {};
-export let next = {};
-
 /**
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
 
-  // get header content from common header document
+  // get header content from common header document, if not already loaded by footer block
   if (!document.headerContent) {
-    document.headerContent = fetch(`./header.plain.html`).then(response => response.text());
+    // make it a promise
+    document.headerContent =fetch(`./header.plain.html`).then(response => response.text());
   }
 
+  // get the dom, wait for promise 
   const domHeader = document.createRange().createContextualFragment(await document.headerContent);
   // get the logo
   const domLogo = domHeader.querySelector('picture');
@@ -34,7 +33,7 @@ export default async function decorate(block) {
   // fill in list of slides
   domHamburger.querySelector('.hamburger-nav').append(domSlides);
   // mark active page
-  domHamburger.querySelector(`[href='${document.location.pathname}']`).classList ='active';
+  domHamburger.querySelector(`[href='${document.location.pathname}']`).classList = 'active';
   // add the hamburger menu
   block.append(domHamburger);
   // add the logo
