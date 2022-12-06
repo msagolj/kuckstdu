@@ -1,0 +1,14 @@
+{
+    "project": "Franklin Slides",
+    "host": "dont.know.yet",
+    "plugins": [
+      {
+        "id": "adminui",
+        "title": "Admin UI",
+        "environments": [ "any" ],
+        "url": "tobedefined.com",
+        "passReferrer": true,
+        "passConfig": true
+      }
+    ]
+  }
