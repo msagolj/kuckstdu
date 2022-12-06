@@ -6,7 +6,7 @@
         "id": "adminui",
         "title": "Project Explorer",
         "environments": [ "any" ],
-        "url": "https://main--projectexplorer--msagolj.hlx.page/",
+        "url": "https://localhost:3000/",
         "passReferrer": true,
         "passConfig": true
       }
