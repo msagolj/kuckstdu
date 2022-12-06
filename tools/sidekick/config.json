@@ -4,9 +4,9 @@
     "plugins": [
       {
         "id": "adminui",
-        "title": "Admin UI",
+        "title": "Project Explorer",
         "environments": [ "any" ],
-        "url": "tobedefined.com",
+        "url": "https://main--projectexplorer--msagolj.hlx.page/",
         "passReferrer": true,
         "passConfig": true
       }
