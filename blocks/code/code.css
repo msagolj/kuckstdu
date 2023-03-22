@@ -1,0 +1,45 @@
+.code pre {
+  background-color: #2b2b2b;
+  margin: 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.code .hljs {
+  background-color: #2b2b2b;
+  color: lightskyblue;
+}
+
+.code code.hljs::before {
+  font-weight: bold;
+  border-bottom: 1px solid white;
+  display:block;
+  margin-bottom: 10px;
+  text-align: end;
+}
+
+.code code.language-css::before {
+  content: "CSS";
+}
+
+.code code.language-javascript::before {
+  content: "JavaScript";
+}
+
+.code code.language-xml::before {
+  content: "XML";
+}
+
+.code code.language-html::before {
+  content: "HTML";
+}
+
+.code code.language-json::before {
+  content: "JSON";
+}
+.code code.hljs::after {
+  content: " ";
+  display:block;
+  margin-top: 20px;
+  border-top: 1px solid white;
+}
