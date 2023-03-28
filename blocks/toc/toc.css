@@ -1,0 +1,33 @@
+aside.toc {
+  grid-area: toc;
+  position: relative;
+  background-color: lightgray;
+  padding: 0 1rem;
+}
+
+aside.toc > div {
+  position: sticky;
+  top: calc( var(--header-height) + 2rem);
+}
+
+
+aside.toc li {
+  list-style: disc;
+  white-space: nowrap;
+}
+
+aside.toc li.closed {
+  list-style: disclosure-closed;
+}
+
+aside.toc li.open {
+  list-style: disclosure-open;
+}
+
+aside.toc li.closed ul {
+  display: none;
+}
+
+aside.toc ul {
+  margin-inline-start: -20px;
+}

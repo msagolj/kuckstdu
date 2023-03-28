@@ -604,17 +604,6 @@ window.addEventListener('error', (event) => {
 
 loadPage(document);
 
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
-  }
-}
-
 function loadHeader(header) {
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
@@ -635,8 +624,27 @@ function loadFooter(footer) {
  */
 function buildAutoBlocks(main) {
   try {
-    // interferes with my own hero blo
-    // buildHeroBlock(main);
+    // create an aside element with a sidebar block before main
+    const sidebarAside = document.createElement('aside');
+    sidebarAside.classList.add('sidebar');
+    const sidebarBlock = buildBlock('sidebar', '');
+    sidebarAside.append(sidebarBlock);
+    decorateBlock(sidebarBlock);
+    loadBlock(sidebarBlock);
+    main.prepend(sidebarAside);
+
+    // create an aside element with a toc block before main
+    const tocAside = document.createElement('aside');
+    tocAside.classList.add('toc');
+    const tocBlock = buildBlock('toc', '');
+    tocAside.append(tocBlock);
+    decorateBlock(tocBlock);
+    loadBlock(tocBlock);
+    main.append(tocAside);
+
+    // create the article info block on top of page
+    const articleInfoBlock = buildBlock('articleinfo', '');
+    document.querySelector('main > div').prepend(articleInfoBlock);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

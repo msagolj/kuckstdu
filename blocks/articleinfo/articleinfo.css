@@ -1,0 +1,33 @@
+.articleinfo {
+  display:flex;
+  justify-content: space-between;
+  color: #8d8d8d;
+  border-bottom: 1px solid ;
+  font-size: 1.5rem;
+}
+
+.articleinfo .author {
+  display: none;
+}
+
+.articleinfo .article-date {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.articleinfo .article-date .published {
+  margin-right: 2rem;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  /* start showing authors name */
+  .articleinfo .author {
+    display: initial;
+  }
+
+  /* start showing published date */
+  .articleinfo .article-date .published {
+    display: initial;
+  }
+}
