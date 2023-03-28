@@ -28,6 +28,7 @@
   --heading-font-size-xs: 1.2rem;
 
   --header-height: 64px;
+  --footer-height: 40px;
 }
 
 html {
@@ -140,7 +141,7 @@ code.hljs::after {
   /* switch to a 2 col grid */
   main {
     display: grid;
-    grid-template: "sidebar main"
+    grid-template: "sidebar main" 
     / minmax(0,1fr) minmax(0,3fr)  ;
   }
   /* place the main div section in the right grid area */
@@ -159,7 +160,7 @@ code.hljs::after {
   /*switch to a 3 col grid */
   main {
     display: grid;
-    grid-template: "sidebar main toc" 
+    grid-template: "sidebar main toc" minmax(calc(100vh - var(--header-height) - var(--footer-height) ),min-content)
     / 1fr 2.5fr 1fr ;
   }
 
