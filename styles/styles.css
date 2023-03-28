@@ -159,8 +159,8 @@ code.hljs::after {
   /*switch to a 3 col grid */
   main {
     display: grid;
-    grid-template: "sidebar main toc"
-    / minmax(0,1fr) minmax(0,2.5fr) minmax(0,1fr) ;
+    grid-template: "sidebar main toc" 
+    / 1fr 2.5fr 1fr ;
   }
 
   /* start showing the toc */
