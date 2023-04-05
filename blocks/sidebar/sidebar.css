@@ -1,3 +1,36 @@
 aside.sidebar {
   grid-area: sidebar;
+  position: relative;
+  background-color: lightgray;
+  padding: 0 1rem;
+}
+
+aside.sidebar > div {
+  position: sticky;
+  top: calc( var(--header-height) + 2rem);
+}
+
+
+aside.sidebar li {
+  list-style: disc;
+  white-space: nowrap;
+}
+
+aside.sidebar li.closed {
+  list-style: disclosure-closed;
+}
+
+aside.sidebar li.open {
+  list-style: disclosure-open;
+}
+
+aside.sidebar li span.active {
+  background-color: rgb(148, 233, 169);
+}
+
+aside.sidebar li.closed ul {
+  display: none;
+}
+
+aside.sidebar ul {
 }

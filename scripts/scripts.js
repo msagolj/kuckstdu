@@ -645,6 +645,10 @@ function buildAutoBlocks(main) {
     // create the article info block on top of page
     const articleInfoBlock = buildBlock('articleinfo', '');
     document.querySelector('main > div').prepend(articleInfoBlock);
+
+    // add a tl;dr block after the h1 with description
+    const tldrBlock = buildBlock('tldr', '');
+    document.querySelector('main h1').after(tldrBlock);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

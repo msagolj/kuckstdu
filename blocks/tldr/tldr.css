@@ -1,0 +1,17 @@
+.tldr {
+  text-align: center;
+  background: rgb(233, 190, 148);
+  padding: 1rem;
+  border-radius: 4px;
+}
+.tldr::before {
+  content: '<tldr>';
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.tldr::after {
+  content: '</tldr>';
+  font-weight:bold;
+  margin-left: 1rem;
+}

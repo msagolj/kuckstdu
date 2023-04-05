@@ -1,5 +1,3 @@
-import { decorateIcons } from '../../scripts/scripts.js';
-
 /**
  * Generates an LI element with an anchor link to the the heading.
  *
@@ -78,13 +76,16 @@ function buildTOC2(headings, currentHeadingLevel, parentList) {
  */
 export default async function decorate(block) {
   block.textContent = '';
+  const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'On this Page');
   const tocTitle = document.createElement('h1');
-  tocTitle.innerHTML = 'Article Content';
-  block.append(tocTitle);
+  tocTitle.innerHTML = 'On this Page';
+  nav.append(tocTitle);
+  block.append(nav);
 
   const headings = Array.from(document.querySelectorAll('main > div.section h1,h2,h3,h4,h5,h6'));
   const ul = document.createElement('ul');
+  nav.append(ul);
   buildTOC2(headings, 1, ul);
-  decorateIcons(block);
-  block.append(ul);
+  block.append(nav);
 }
