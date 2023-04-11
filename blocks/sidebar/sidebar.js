@@ -1,97 +1,91 @@
-/* eslint-disable no-unused-expressions */
-
-function createLIEntry(page, isPage, pathElem, activePage) {
-  // create an li element
-  const li = document.createElement('li');
-  // if we have reached page level
-  if (isPage) {
-    const title = page.title !== '' ? page.title : '[NO TITLE]';
-    // if its the currently active page
-    if (page.path === activePage) {
-      // highlight it
-      const span = document.createElement('span');
-      span.innerText = title;
-      span.classList.add('active');
-      li.append(span);
-    } else {
-      // create a link to the page
-      const a = document.createElement('a');
-      a.setAttribute('href', page.path);
-      a.innerText = title;
-      li.append(a);
-    }
-  } else {
-    // if not its an folder
-    li.innerText = `${pathElem}`;
-  }
-  return li;
+function getSubPaths(entry) {
+  const subPaths = [];
+  entry.split('/').reduce((prevSubPath, nextPathElem) => {
+    const nextSubPath = `${prevSubPath}/${nextPathElem}`;
+    subPaths.push(nextSubPath);
+    return nextSubPath;
+  });
+  subPaths.unshift('');
+  return subPaths;
 }
 
-/**
- * Renders nested UL's for a page hierarchy.
- * Handles root ('/'), index pages, folders, pages with no titles, max open levels,
- * current Page highlighting.
- * @param {Array<Array>} pages Array of pages, sorted alphabetically by path.
- * Each entry is [path,title];
- * @param {int} openLevels How many levels of the hierarchy should be shown open initially.
- * @param {string} activePage The page that should be highlighted as the current page we are on.
- * @returns the root UL element that can be attached to the DOM.
- */
-function buildSiteTree(pages, openLevels, activePage) {
-  // start with an empty root list
-  let buildPath = [[undefined, document.createElement('ul')]];
-  // loop while there are pages
-  while (pages.length > 0) {
-    // get the next page
-    const page = pages.shift();
-    // ignore the / at the begining
-    const pagePath = page.path.substring(1).split('/');
-    // ignore trailing / (aka index page) exept for special case root path '/'
-    if (pagePath.length > 1 && pagePath.slice(-1)[0] === '') pagePath.pop();
+function buildSiteTree(sortedNavEntries, currentPage, openLevels) {
+  // turn active page into ordered list of all sub paths it contains
+  const currPageSubPaths = getSubPaths(currentPage);
 
-    // loop through all the path parts
-    // eslint-disable-next-line no-loop-func
-    [...pagePath].forEach((pathElem, i) => {
-      // if we are deeper then prev entry
-      if (buildPath[i] === undefined) {
-        // start a new sublist
-        const ul = document.createElement('ul');
-        const li = createLIEntry(page, pagePath.length === i + 1, pathElem, activePage);
-        ul.append(li);
-        const parentLi = buildPath[i - 1][1].lastChild;
-        // append it to parents last li element
-        parentLi.append(ul);
-        // show the entry as open if below open levels or if its current page path
-        if (i < openLevels || activePage.startsWith(`/${buildPath.map((e) => e[0]).join('/')}`)) {
-          parentLi.classList.add('open');
-        } else {
-          parentLi.classList.add('closed');
+  // init the previous entry array
+  const rootUl = document.createElement('ul');
+  rootUl.classList.add('root');
+  let buildSubPaths = [['', rootUl]];
+
+  // go through all the entries in the navigation
+  [...sortedNavEntries].forEach((entry) => {
+    // get ordered sub paths
+    const currEntrySubPaths = getSubPaths(entry.path);
+    // go through all sub paths
+    for (let i = 0; i < currEntrySubPaths.length; i += 1) {
+      // if we are deeper then the previous entry or diverging from pervious path
+      if (!buildSubPaths[i] || buildSubPaths[i][0] !== currEntrySubPaths[i]) {
+        // marker if we are on active path
+        const isActivePath = currEntrySubPaths[i] === currPageSubPaths[i];
+        // star the element
+        const li = document.createElement('li');
+        // is it a leaf page
+        if (i === currEntrySubPaths.length - 1) {
+          // add link to page
+          const link = document.createElement('a');
+          link.innerText = entry.title ? entry.title : '[no title]';
+          link.setAttribute('href', entry.path);
+          // hightlight active path
+          if (isActivePath) link.classList.add('active');
+          li.append(link);
+          // add it to parent ul
+          buildSubPaths[i - 1][1].append(li);
+          // cut of the rest afterwards if there is any
+          buildSubPaths = buildSubPaths.slice(0, i + 1);
+        } else { // its a folder
+          // add event listener
+          li.addEventListener('click', (e) => {
+            // eslint-disable-next-line no-unused-expressions
+            e.target.classList.contains('open') ? e.target.classList.replace('open', 'closed') : e.target.classList.replace('closed', 'open');
+            e.stopPropagation();
+          });
+          // open or closed
+          // eslint-disable-next-line no-unused-expressions
+          (i <= openLevels || (isActivePath && currentPage !== currEntrySubPaths[i + 1])) ? li.classList.add('open') : li.classList.add('closed');
+          // add it to the parent ul
+          buildSubPaths[i - 1][1].append(li);
+          // start a new sub ul
+          const folderContent = document.createElement('ul');
+          li.append(folderContent);
+          // update buildSubPaths
+          buildSubPaths[i] = [currEntrySubPaths[i], folderContent];
+          // cut of the rest afterwards if there is any
+          buildSubPaths = buildSubPaths.slice(0, i + 1);
+          // if its a folder with an index page
+          if (currEntrySubPaths[i + 1].endsWith('/')) {
+            // then we add a link
+            const link = document.createElement('a');
+            link.innerText = entry.title ? entry.title : '[no title]';
+            link.setAttribute('href', entry.path);
+            // hightlight active path
+            if (isActivePath) link.classList.add('active');
+            li.prepend(link);
+            break;
+          } else {
+            const span = document.createElement('span');
+            span.innerText = currEntrySubPaths[i].split('/').pop();
+            // hightlight active path
+            if (isActivePath) span.classList.add('active');
+            li.prepend(span);
+          }
         }
-        // add event listener to open close folders
-        parentLi.addEventListener('click', (e) => {
-          const { classList } = e.target;
-          classList.contains('open') ? classList.replace('open', 'closed') : classList.replace('closed', 'open');
-          e.stopPropagation();
-        });
-        // make the new ul the current element
-        buildPath[i] = [pathElem, ul];
-        return;
       }
-      // if we are diverging
-      if (buildPath[i][0] !== pathElem) {
-        // create a new li entry
-        const li = createLIEntry(page, pagePath.length === i + 1, pathElem, activePage);
-        // update the current entry's name
-        buildPath[i][0] = pathElem;
-        // add the new li entry to the list
-        buildPath[i][1].append(li);
-        // cut of the rest
-        buildPath = buildPath.slice(0, i + 1);
-      }
-    });
-  }
-  // return the root list
-  return buildPath[0][1];
+    }
+  });
+
+  // return the root ul element
+  return buildSubPaths[0][1];
 }
 
 export default async function decorate(block) {
@@ -106,7 +100,8 @@ export default async function decorate(block) {
     nav.append(siteNavTitle);
     // get the sorted list of links
     const { data } = await resp.json();
-    nav.append(buildSiteTree(data, 1, window.location.pathname));
+    data.shift();
+    nav.append(buildSiteTree(data, window.location.pathname, 6));
     block.append(nav);
   }
 }

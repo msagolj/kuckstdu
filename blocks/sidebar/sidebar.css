@@ -24,13 +24,13 @@ aside.sidebar li.open {
   list-style: disclosure-open;
 }
 
-aside.sidebar li span.active {
+/* highlight the active path */
+aside.sidebar li span.active, a.active {
   background-color: rgb(148, 233, 169);
 }
 
-aside.sidebar li.closed ul {
+/* hide closed sub directories */
+aside.sidebar li.closed > ul {
   display: none;
 }
 
-aside.sidebar ul {
-}
