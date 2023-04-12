@@ -19,19 +19,28 @@ function getLink(entry, isCurrentPage) {
   return link;
 }
 
+function addFolder(li, isOpen) {
+  // add event listener to open/close
+  li.addEventListener('click', (e) => {
+    const classes = e.target.classList;
+    classes.contains('open') ? classes.replace('open', 'closed') : classes.replace('closed', 'open');
+    e.stopPropagation();
+  });
+  // open or closed
+  isOpen ? li.classList.add('open') : li.classList.add('closed');
+  // start a new sub ul
+  const folderContent = document.createElement('ul');
+  li.append(folderContent);
+  return folderContent;
+}
+
 function buildSiteTree(entries, currentPage, openLevels) {
   // get sub paths for current page
   const currPageSubPaths = getSubPaths(currentPage);
-
+  // skip special case / to the end
+  const root = entries[0].path === '/' ? entries.shift() : null;
   // init the build array with a root ul element
-  const rootUl = document.createElement('ul');
-  rootUl.classList.add('root');
-  const buildSubPaths = [['', rootUl]];
-
-  // special case '/'
-  if (entries[0].path === '/') {
-  }
-
+  const buildSubPaths = [['', document.createElement('ul')]];
   // go through all the entries in the navigation
   [...entries].forEach((entry) => {
     // go through all sub paths
@@ -48,20 +57,12 @@ function buildSiteTree(entries, currentPage, openLevels) {
         // if its a leaf page add link
         if (i === currEntrySubPaths.length - 1) {
           li.append(getLink(entry, isCurrPageSubPath));
-        } else { // its a folder
-          // add event listener to open/close
-          li.addEventListener('click', (e) => {
-            const classes = e.target.classList;
-            classes.contains('open') ? classes.replace('open', 'closed') : classes.replace('closed', 'open');
-            e.stopPropagation();
-          });
-          // open or closed, depending on inital open levels and if its on current page path
-          (i <= openLevels || isCurrPageSubPath) ? li.classList.add('open') : li.classList.add('closed');
-          // start a new sub ul and update buildSubPaths
-          const folderContent = document.createElement('ul');
-          li.append(folderContent);
-          buildSubPaths[i] = [currEntrySubPaths[i], folderContent];
-          // if its a folder with an index page add a link and skip to next entry
+        } else {
+          // its a folder
+          const folder = addFolder(li, (i <= openLevels || isCurrPageSubPath));
+          // add new folder to build path
+          buildSubPaths[i] = [currEntrySubPaths[i], folder];
+          // if its a folder with an index page add a link and go to next entry
           if (currEntrySubPaths[i + 1].endsWith('/')) {
             li.prepend(getLink(entry, isCurrPageSubPath));
             break;
@@ -76,7 +77,19 @@ function buildSiteTree(entries, currentPage, openLevels) {
     }
   });
 
+  // if / was the very first entry
+  if (root) {
+    const ul = document.createElement('ul');
+    ul.classList.add('root');
+    const li = document.createElement('li');
+    ul.append(li);
+    li.removeChild(addFolder(li, true));
+    li.append(getLink(root, true));
+    li.append(buildSubPaths[0][1]);
+    return ul;
+  }
   // return the root ul element
+  buildSubPaths[0][1].classList.add('root');
   return buildSubPaths[0][1];
 }
 
@@ -93,7 +106,7 @@ export default async function decorate(block) {
     // get the sorted list of links
     const { data } = await resp.json();
     data.shift();
-    nav.append(buildSiteTree(data, window.location.pathname, 1));
+    nav.append(buildSiteTree(data, window.location.pathname, 0));
     block.append(nav);
   }
 }
