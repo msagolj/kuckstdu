@@ -10,16 +10,18 @@ aside.sidebar > div {
   top: calc( var(--header-height) + 2rem);
 }
 
-
+/* general styling for li element */
 aside.sidebar li {
   list-style: disc;
   white-space: nowrap;
 }
 
+/* closed folder list icon */
 aside.sidebar li.closed {
   list-style: disclosure-closed;
 }
 
+/* open folder list icon */
 aside.sidebar li.open {
   list-style: disclosure-open;
 }
