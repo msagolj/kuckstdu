@@ -13,7 +13,6 @@ aside.sidebar > div {
 /* general styling for li element */
 aside.sidebar li {
   list-style: disc;
-  white-space: nowrap;
 }
 
 /* closed folder list icon */
@@ -28,7 +27,7 @@ aside.sidebar li.open {
 
 /* highlight the active path */
 aside.sidebar li span.active, a.active {
-  background-color: rgb(148, 233, 169);
+  border: 1px solid rgb(255, 0, 169);
 }
 
 /* hide closed sub directories */

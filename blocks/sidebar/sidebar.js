@@ -149,8 +149,8 @@ export default async function decorate(block) {
     // get the sorted list of links
     const { data } = await resp.json();
     // ignore /
-    data.shift();
-    nav.append(buildSiteTree(data, window.location.pathname, 6));
+    // data.shift();
+    nav.append(buildSiteTree(data, window.location.pathname, 3));
     block.append(nav);
   }
 }

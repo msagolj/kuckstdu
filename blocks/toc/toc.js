@@ -1,3 +1,7 @@
+/* eslint-disable no-lonely-if */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-continue */
+
 /**
  * Generates an LI element with an anchor link to the the heading.
  *
@@ -7,7 +11,9 @@
 function consumeEntry(heading) {
   const li = document.createElement('li');
   const a = document.createElement('a');
-  a.addEventListener('click', (e) => {
+  a.id = `toc_${heading.id}`;
+  // scroll into view when clicked
+  a.addEventListener('click', () => {
     const top = heading.getBoundingClientRect().y + window.scrollY
     - document.querySelector('header').clientHeight;
     window.scrollTo({
@@ -36,7 +42,6 @@ function buildTOC2(headings, currentHeadingLevel, parentList) {
     // while on same level
     if (nextHeadingLevel === currentHeadingLevel) {
       parentList.append(consumeEntry(headings.shift()));
-      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -52,12 +57,10 @@ function buildTOC2(headings, currentHeadingLevel, parentList) {
       parentList.lastChild.append(subList);
       parentList.lastChild.classList.add('open');
       parentList.lastChild.addEventListener('click', (e) => {
-        // eslint-disable-next-line no-unused-expressions
         e.target.classList.contains('open') ? e.target.classList.replace('open', 'closed') : e.target.classList.replace('closed', 'open');
         e.stopPropagation();
       });
       buildTOC2(headings, nextHeadingLevel, subList);
-      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -69,7 +72,7 @@ function buildTOC2(headings, currentHeadingLevel, parentList) {
 }
 
 /**
- * Generates a TOC, based on the headings in the main section titlesand 
+ * Generates a TOC, based on the headings in the main section and
  * turn them into nested UL lists.
  *
  * @param {HTMLElement} block The root element of the block.
@@ -83,9 +86,10 @@ export default async function decorate(block) {
   nav.append(tocTitle);
   block.append(nav);
 
-  const headings = Array.from(document.querySelectorAll('main > div.section h1,h2,h3,h4,h5,h6'));
+  const headings = Array.from(document.querySelectorAll('main > div.section h2,h3,h4,h5,h6'));
+
   const ul = document.createElement('ul');
   nav.append(ul);
-  buildTOC2(headings, 1, ul);
+  buildTOC2(headings, 2, ul);
   block.append(nav);
 }
