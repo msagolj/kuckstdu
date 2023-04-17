@@ -44,7 +44,7 @@ indices:
   full-text:
     include:
       - '/**'
-    target: /full-text.json
+    target: /full-text
     properties:
       title:
         select: head > meta[property="og:title"]
