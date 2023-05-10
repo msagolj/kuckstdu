@@ -63,6 +63,7 @@ main > div.section p img {
   border: 1px solid black;
   max-inline-size: 100%;
   height: auto;
+  border-radius:10px;
 }
 
 /* hide the side bar in mobile for now */
