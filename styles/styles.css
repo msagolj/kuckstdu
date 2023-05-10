@@ -1,4 +1,4 @@
- /* mobile */
+ /* ---- mobile ----- */
  :root {
   /* colors */
   --link-color: #035fe6;
@@ -148,6 +148,8 @@ code.hljs::after {
   border-top: 1px solid white;
 }
 
+/* ----- Tablets ---- */
+
 /* start showing sidebar  */
 @media (min-width: 768px) {
   /* switch to a 2 col grid */
@@ -167,6 +169,8 @@ code.hljs::after {
     display:initial;
   }
 }
+
+/* ---- Desktop ---- */
 
 /* start showing toc */
 @media (min-width: 1200px) {

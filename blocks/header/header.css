@@ -8,6 +8,7 @@ header {
 }
 
 /* HAMBURGER MENU */
+
 /* hide the input checkbox */
 #hamburger-toggle {
 opacity: 0;
@@ -21,7 +22,7 @@ position: absolute;
   left: 15px;
   width: 30px;
   height: 30px;
-  opacity: 0%;
+  opacity: 0;
   transition: opacity 1s;
   cursor: pointer;
   z-index: 1;
@@ -29,7 +30,7 @@ position: absolute;
 
 /* blend label in when mouse hovers over it */
 .hamburger-button-label:hover, #hamburger-toggle:checked ~ .hamburger-button-label {
-  opacity: 100%;
+  opacity: 1;
 }
 
 /* style the 3 stripes */
@@ -39,7 +40,7 @@ position: absolute;
   width: 100%;
   height: 3px;
   margin-bottom: 8px;
-  opacity: 100%;
+  opacity: 1;
   transition-duration: .5s;
 }
 
@@ -50,7 +51,7 @@ position: absolute;
 
 /* fade 2nd stripe out */
 #hamburger-toggle:checked + .hamburger-button-label > span:nth-child(2) {
-  opacity : 0%;
+  opacity : 0;
   transform: translateX(20px);
 }
 
@@ -67,19 +68,16 @@ position: absolute;
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
   display:flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   justify-content:start;
   align-items: flex-start;
-
   block-size: 100vh;
   box-sizing: border-box;
-
   padding-top:40px;
   background-color:darkgray;
   border-end-end-radius: 20px;
   border-start-end-radius: 20px;
-  opacity: 90%;
+  opacity: 0.9;
 }
 
 /* slide the menu in/out */
@@ -103,7 +101,7 @@ position: absolute;
 
 .hamburger-nav a {
   display:inline-block;
-  padding: 15px 20px 0px 0px;
+  padding: 15px 20px 0 0;
   color: black;
 }
 
@@ -112,7 +110,7 @@ position: absolute;
   transform: translateX(0%);
 }
 
-/* nav entry matches current page*/
+/* nav entry matches current page */
 .hamburger-nav .active {
   font-weight: bold;
 }
