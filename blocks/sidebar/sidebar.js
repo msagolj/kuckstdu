@@ -2,6 +2,7 @@
 /* eslint-disable no-lonely-if */
 /* eslint-disable no-unused-expressions */
 
+/* generates a list of all sub paths of a url */
 function getSubPaths(entry) {
   const subPaths = [];
   entry.split('/').reduce((prevSubPath, nextPathElem) => {
@@ -13,6 +14,7 @@ function getSubPaths(entry) {
   return subPaths;
 }
 
+/* generates the link element */
 function getLink(entry, isCurrentPage) {
   const link = document.createElement('a');
   link.innerText = entry.title ? entry.title : '[no title]';
@@ -21,6 +23,7 @@ function getLink(entry, isCurrentPage) {
   return link;
 }
 
+/* creates the folder DOM and event listeners */
 function addFolder(li, isOpen) {
   // add event listener to open/close
   li.addEventListener('click', (e) => {
@@ -149,8 +152,8 @@ export default async function decorate(block) {
     // get the sorted list of links
     const { data } = await resp.json();
     // ignore /
-    // data.shift();
-    nav.append(buildSiteTree(data, window.location.pathname, 3));
+    data.shift();
+    nav.append(buildSiteTree(data, window.location.pathname, 0));
     block.append(nav);
   }
 }

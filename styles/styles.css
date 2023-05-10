@@ -39,7 +39,6 @@ body {
   margin:0;
   background-color: var(--background-color);
   width: auto;
-
   font-size: 1.6rem;
   text-decoration: none;
   font-weight: 100;
@@ -53,6 +52,11 @@ main {
 /* the main content section */
 main > div.section {
   padding: 1rem;
+}
+
+/* images */
+main > div.section img {
+  border: 1px solid black;
 }
 
 /* hide the side bar in mobile for now */
@@ -144,6 +148,7 @@ code.hljs::after {
     grid-template: "sidebar main" 
     / minmax(0,1fr) minmax(0,3fr)  ;
   }
+
   /* place the main div section in the right grid area */
   main > div.section {
     grid-area: main;

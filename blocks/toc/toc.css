@@ -24,14 +24,14 @@ aside.toc li.open {
   list-style: disclosure-open;
 }
 
-aside.toc li.closed ul {
-  display: none;
-}
-
 aside.toc ul {
   margin-inline-start: -20px;
 }
 
+aside.toc li.closed ul {
+  display: none;
+}
+
 aside.toc a.active {
-  border: 1px solid rgb(255, 0, 169);
+  background-color : lightcoral;
 }

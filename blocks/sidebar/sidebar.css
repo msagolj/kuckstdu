@@ -27,7 +27,7 @@ aside.sidebar li.open {
 
 /* highlight the active path */
 aside.sidebar li span.active, a.active {
-  border: 1px solid rgb(255, 0, 169);
+  background-color : lightcoral;
 }
 
 /* hide closed sub directories */
