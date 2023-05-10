@@ -633,7 +633,7 @@ function buildAutoBlocks(main) {
     loadBlock(sidebarBlock);
     main.prepend(sidebarAside);
 
-    // create an aside element with a toc block before main
+    // create an aside element with a toc block after main
     const tocAside = document.createElement('aside');
     tocAside.classList.add('toc');
     const tocBlock = buildBlock('toc', '');

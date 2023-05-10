@@ -1,5 +1,10 @@
 import { getMetadata } from '../../scripts/scripts.js';
 
 export default function decorate(Block) {
-  Block.textContent = getMetadata('description');
+  const description = getMetadata('description');
+  if (description !== '' && description !== null) {
+    Block.textContent = description;
+  } else {
+    Block.textContent = '';
+  }
 }

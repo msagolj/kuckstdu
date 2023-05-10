@@ -1,16 +1,17 @@
-.tldr {
+.tldr:not(:empty) {
   text-align: center;
-  background: rgb(233, 190, 148);
+  background: rgb(233 190 148);
   padding: 1rem;
   border-radius: 4px;
 }
-.tldr::before {
+
+.tldr:not(:empty)::before {
   content: '<tldr>';
   font-weight: bold;
   margin-right: 1rem;
 }
 
-.tldr::after {
+.tldr:not(:empty)::after {
   content: '</tldr>';
   font-weight:bold;
   margin-left: 1rem;

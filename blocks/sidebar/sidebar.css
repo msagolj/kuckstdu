@@ -10,6 +10,10 @@ aside.sidebar > div {
   top: calc( var(--header-height) + 2rem);
 }
 
+aside.sidebar ul {
+  margin-inline-start: -20px;
+}
+
 /* general styling for li element */
 aside.sidebar li {
   list-style: disc;

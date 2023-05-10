@@ -26,7 +26,6 @@
   --heading-font-size-m: 2rem;
   --heading-font-size-s: 1.6rem;
   --heading-font-size-xs: 1.2rem;
-
   --header-height: 64px;
   --footer-height: 40px;
 }
@@ -55,8 +54,15 @@ main > div.section {
 }
 
 /* images */
-main > div.section img {
+main > div.section picture {
+  display: block;
+  text-align: center;
+}
+
+main > div.section p img {
   border: 1px solid black;
+  max-inline-size: 100%;
+  height: auto;
 }
 
 /* hide the side bar in mobile for now */
@@ -93,7 +99,7 @@ aside.toc {
   font-size: 1.6rem;
 }
 
-a:hover, a:visited, a {
+a, a:hover, a:visited {
   text-decoration:none;
   color: blue;
 }
@@ -103,6 +109,7 @@ pre code.hljs {
   display:block;
   padding: 0 20px;
   overflow: hidden;;
+  border-radius: 10px;
 }
 
 code.hljs::before {
@@ -146,7 +153,7 @@ code.hljs::after {
   main {
     display: grid;
     grid-template: "sidebar main" 
-    / minmax(0,1fr) minmax(0,3fr)  ;
+    / minmax(max-content,1fr) minmax(0,3fr)  ;
   }
 
   /* place the main div section in the right grid area */
@@ -162,11 +169,11 @@ code.hljs::after {
 
 /* start showing toc */
 @media (min-width: 1200px) {
-  /*switch to a 3 col grid */
+  /* switch to a 3 col grid */
   main {
     display: grid;
     grid-template: "sidebar main toc" minmax(calc(100vh - var(--header-height) - var(--footer-height) ),min-content)
-    / 1fr 2.5fr 1fr ;
+    / minmax(max-content,1fr) minmax(650px,900px) minmax(max-content,1fr) ;
   }
 
   /* start showing the toc */
@@ -176,9 +183,9 @@ code.hljs::after {
 }
 
 /* there is no point in going wider */
-@media (min-width: 1400px) {
+@media (min-width: 1500px) {
   main {
-    width:1400px;
+    width:1500px;
     margin: 0 auto;
   }
 }
