@@ -1,0 +1,151 @@
+/* the section that contains VIP locations with a different background color */
+.section.samplesvg-container {
+  background-color: #F6F6F6;
+  overflow: hidden;
+}
+
+/* the block */
+.samplesvg {
+  margin-top: 50px;
+  width:100%;
+}
+
+/* the stadion svg */
+.samplesvg svg {
+  width: 100%;
+  height: auto;
+}
+
+/* the legend */
+.samplesvg .legend {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 75px;
+  width:100%;
+}
+
+/* left/ right alignment for 2 rows */
+.samplesvg .legend a:nth-child(odd){
+  padding-inline-end: 26px;
+  box-sizing: border-box;
+  text-align: end;
+}
+
+.samplesvg .legend a:nth-child(odd)::after{
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-inline-start: 10px;
+  position: absolute;
+  top: 14px;
+}
+
+.samplesvg .legend a:nth-child(even){
+  padding-inline-start: 26px;
+  box-sizing: border-box;
+}
+
+.samplesvg .legend a:nth-child(even)::before{
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-inline-end: 10px;
+  position: absolute;
+  top: 14px;
+  left: 6px;
+  inset-inline-start: 6px; /* this is the same as left 6px but supporting rtl.
+   We keep both for old browsers not supporting inset-inline-start */
+  background-color: var(--vip-locations-color);
+}
+
+/* common legend entry props */
+.samplesvg .legend .legend-entry {
+  text-decoration: none;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: -0.2px;
+  color: var(--text-color);
+  flex-basis: 50%;
+  height: auto;
+  padding: 10px 0;
+  box-sizing: border-box;
+  line-height: 1.3;
+  position: relative;
+}
+
+/* the different colors for the VIP sections */
+
+@media (max-width: 990px) {
+  .samplesvg .legend a:nth-child(odd)::after {
+    background-color:  var(--vip-locations-color);
+  }
+}
+
+@media (min-width: 990px) {
+  /* the section */
+  .section.samplesvg-container {
+  }
+
+  /* the block */
+  .samplesvg {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  /* the stadion svg */
+  .samplesvg svg {
+    flex-basis: 750px;
+  }
+
+  /* the legend */
+  .samplesvg .legend {
+    flex-basis: 700px;
+    display: flex;
+    flex-flow: column wrap;
+    padding-inline-start: 200px;
+    margin-top: 35px;
+  }
+
+  /* add hover highlighting */
+  .samplesvg .legend a:hover {
+    background-color: #EAEAEA;
+  }
+
+  /* align all entries to the left */
+  .samplesvg .legend a:nth-child(odd){
+    text-align: start;
+  }
+
+  /* remove the after settings */
+  .samplesvg .legend a:nth-child(odd)::after {
+    content: unset;
+  }
+
+  .samplesvg .legend a:nth-child(even){
+    padding-inline-start: 0;
+  }
+
+  .samplesvg .legend a:nth-child(odd)::before,
+  .samplesvg .legend a:nth-child(even)::before{
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-inline-end: 10px;
+    margin-inline-start: 8px;
+    position: static;
+  }
+
+
+  .samplesvg .legend a:nth-child(odd)::before {
+    background-color:  var(--vip-locations-color);
+  }
+}
+
