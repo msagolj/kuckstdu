@@ -1,6 +1,6 @@
 /* -- header section */
 header {
-  height: 64px;
+  height: var(--header-height);
   background-color: white;
   border-bottom: 1px solid lightgrey;
   position: sticky;
