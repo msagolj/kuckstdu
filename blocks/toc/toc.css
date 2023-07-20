@@ -17,7 +17,8 @@ aside.toc a {
   color: var(--text-color);
   text-decoration: none;
   line-height: 3rem;
-  margin-right: 2rem;;
+  margin-right: 2rem;
+  padding-left: 0.5rem;
 }
 
 aside.toc a:hover {

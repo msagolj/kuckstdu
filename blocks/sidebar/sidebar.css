@@ -14,6 +14,11 @@ aside.sidebar a {
   color: var(--text-color);
   line-height: 3rem;
   margin-right: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+aside.sidebar span {
+  padding-left: 0.5rem;
 }
 
 aside.sidebar a:hover{
