@@ -49,7 +49,7 @@ main {
 
 /* the main content section */
 main > div.section {
-  padding: 2rem 5rem;
+  padding: 2rem 3rem;
 }
 
 /* images */
@@ -132,7 +132,7 @@ code.hljs::before {
   padding: 0.5rem 2rem;
   margin-left: -2rem;
   margin-right: -2rem;
-  color: var(--text-color);
+  color: grey;
   background-color: #f9f9f9;
 }
 
@@ -159,7 +159,7 @@ code.language-json::before {
 /* ----- Tablets ---- */
 
 /* start showing sidebar  */
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   /* switch to a 2 col grid */
   main {
     display: grid;

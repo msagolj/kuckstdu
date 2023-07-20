@@ -1,10 +1,17 @@
 /* -- header section */
 header {
   height: 64px;
-  background-color: grey;
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
   position: sticky;
   top:0;
   z-index: 99;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 4rem;
+  margin:0;
 }
 
 /* HAMBURGER MENU */

@@ -2,8 +2,8 @@
   display:flex;
   justify-content: space-between;
   color: #8d8d8d;
-  border-bottom: 1px solid ;
-  font-size: 1.5rem;
+  border-bottom: 1px solid lightgray;
+  font-size: 1.4rem;
 }
 
 .articleinfo .author {

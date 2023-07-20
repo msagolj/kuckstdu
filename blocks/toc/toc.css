@@ -10,12 +10,18 @@ aside.toc {
 
 aside.toc h1 {
   font-weight: 400;
+  text-decoration: underline;
 }
 
 aside.toc a {
   color: var(--text-color);
   text-decoration: none;
   line-height: 3rem;
+  margin-right: 2rem;;
+}
+
+aside.toc a:hover {
+  color: var(--link-color);
 }
 
 aside.toc > div {

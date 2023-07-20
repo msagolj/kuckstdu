@@ -99,7 +99,7 @@ function buildSiteTree(entries, currentPage, openLevels) {
 
       // if its a folder with a page with same name on same level
       const prevEntry = buildSubPaths[i - 1][1].lastChild;
-      if (prevEntry.firstChild.getAttribute('href') === currEntrySubPaths[i]) {
+      if (prevEntry?.firstChild?.getAttribute('href') === currEntrySubPaths[i]) {
         // turn previous leaf into folder
         const folder = addFolder(prevEntry, (i <= openLevels || isCurrPageSubPath));
         // add new folder to build path

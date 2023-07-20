@@ -16,7 +16,7 @@ Typically this "required" baseline CSS is added by `makestuff.js` during build.
 */
 pre code.hljs {
   display: block;
-  overflow-x: hidden;
+  overflow-x: auto;
   padding:0 2rem;
 }
 

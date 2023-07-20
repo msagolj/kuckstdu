@@ -1,18 +1,16 @@
-.tldr:not(:empty) {
-  text-align: center;
-  background: rgb(233 190 148);
-  padding: 1rem;
+.tldr {
   border-radius: 4px;
+  border: 1px solid lightsteelblue;
+  display:flex;
+  align-items: center;
 }
 
-.tldr:not(:empty)::before {
-  content: '<tldr>';
-  font-weight: bold;
+.tldr .tldr-icon {
   margin-right: 1rem;
-}
-
-.tldr:not(:empty)::after {
-  content: '</tldr>';
-  font-weight:bold;
-  margin-left: 1rem;
+  background-color: lightsteelblue;
+  border-radius: 2px;
+  font-weight: 500;
+  padding:1.5rem;
+  font-size: 2rem;
+  color: white;
 }

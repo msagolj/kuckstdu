@@ -1,8 +1,28 @@
 aside.sidebar {
   grid-area: sidebar;
   position: relative;
-  background-color: lightgray;
+  background-color: white;
   padding: 0 1rem;
+}
+
+aside.sidebar nav {
+  margin-left: 2rem;
+}
+
+aside.sidebar a {
+  text-decoration: none;
+  color: var(--text-color);
+  line-height: 3rem;
+  margin-right: 1.5rem;
+}
+
+aside.sidebar a:hover{
+  text-decoration: underline;
+}
+
+aside.sidebar h1 {
+  font-weight: 400;
+  text-decoration: underline;
 }
 
 aside.sidebar > div {
@@ -31,7 +51,11 @@ aside.sidebar li.open {
 
 /* highlight the active path */
 aside.sidebar li span.active, a.active {
-  background-color : lightcoral;
+  background-color : #93870030;
+  border-left: 2px solid #afa100;
+  font-weight: 600;
+  min-width: 100%;
+  display:block;
 }
 
 /* hide closed sub directories */

@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.plus-minus.block  ul {
+  margin: 1.5rem;
+}
+
 .plus-minus.block > div {
   padding: 1rem 0;
 }

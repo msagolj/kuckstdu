@@ -1,15 +1,16 @@
 footer {
-  background-color: darkgrey;
+  background-color: white;
+  border-top: 1px solid lightgrey;
   text-align: center;
   min-height: 40px;
 }
 
 footer button.tag {
-  color: black;
-  background-color: lightblue;
+  color: #444;
+  background-color: lightsteelblue;
   border: none;
-  border-radius: 20px;
-  padding: 7px;
+  border-radius: .5rem;
+  padding: 1rem;
   margin:5px;
 }
 

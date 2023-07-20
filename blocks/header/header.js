@@ -12,7 +12,7 @@ export default async function decorate(block) {
     </label>
     <div class='hamburger-nav'>
     </div>   
-    HEADER SECTION
+    <h1>Kuckst du</h1>
   `);
 
   // add the hamburger menu
