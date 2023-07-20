@@ -649,7 +649,6 @@ function buildAutoBlocks(main) {
     // add a tl;dr block after the h1 with description
     const tldrBlock = buildBlock('tldr', '');
     document.querySelector('main h1').after(tldrBlock);
-
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -708,6 +707,6 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => import('./delayed.js'), 100);
   // load anything that can be postponed to the latest here
 }
