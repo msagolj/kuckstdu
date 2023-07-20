@@ -1,15 +1,27 @@
 aside.toc {
   grid-area: toc;
   position: relative;
-  background-color: lightgray;
+  background-color: white;
   padding: 0 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+aside.toc h1 {
+  font-weight: 400;
+}
+
+aside.toc a {
+  color: var(--text-color);
+  text-decoration: none;
+  line-height: 3rem;
 }
 
 aside.toc > div {
   position: sticky;
   top: calc( var(--header-height) + 2rem);
 }
-
 
 aside.toc li {
   list-style: disc;
@@ -33,5 +45,9 @@ aside.toc li.closed ul {
 }
 
 aside.toc a.active {
-  background-color : lightcoral;
+  background-color : #93870030;
+  border-left: 2px solid #afa100;
+  font-weight: 600;
+  min-width: 100%;
+  display:block;
 }

@@ -1,22 +1,18 @@
- /* ---- mobile ----- */
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
   --background-color: #fff;
-  --text-color: #000;
+  --text-color: #2b2b2b;
+  --link-color: #0085f2;
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
 
   /* we base from everything from 10px */
   font-size: 10px;
 
   /* body sizes */
-  --body-font-size-m: 1.25rem;
-  --body-font-size-s: 1.25rem;
   --body-font-size-xs: 1.6rem;
 
   /* heading sizes */
@@ -26,6 +22,8 @@
   --heading-font-size-m: 2rem;
   --heading-font-size-s: 1.6rem;
   --heading-font-size-xs: 1.2rem;
+
+  /* header and footer heights */
   --header-height: 64px;
   --footer-height: 40px;
 }
@@ -37,10 +35,11 @@ html {
 body {
   margin:0;
   background-color: var(--background-color);
+  color: var(--text-color);
   width: auto;
   font-size: 1.6rem;
   text-decoration: none;
-  font-weight: 100;
+  font-weight: 400;
   font-family: var(--body-font-family);
 }
 
@@ -50,7 +49,7 @@ main {
 
 /* the main content section */
 main > div.section {
-  padding: 1rem;
+  padding: 2rem 5rem;
 }
 
 /* images */
@@ -60,10 +59,9 @@ main > div.section picture {
 }
 
 main > div.section p img {
-  border: 1px solid black;
+  border: 1px solid lightgrey;
   max-inline-size: 100%;
   height: auto;
-  border-radius:10px;
 }
 
 /* hide the side bar in mobile for now */
@@ -81,18 +79,21 @@ aside.toc {
   text-align: center;
   font-size: var(--heading-font-size-xxl);
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .default-content-wrapper h2 {
   text-align:start;
   font-size: var(--heading-font-size-xl);
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .default-content-wrapper h3 {
   text-align:start;
   font-size: var(--heading-font-size-l);
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .default-content-wrapper p {
@@ -100,25 +101,39 @@ aside.toc {
   font-size: 1.6rem;
 }
 
+/* content stuff */
+strong {
+  font-weight: 500;
+}
+
+/* code inside text */
+p > code , li > code {
+  background-color: #ebebeb;
+  font-size: 1.3rem;
+  font-weight: 400;
+  padding: .125rem .25rem;
+  border-radius: 0.5rem;
+}
+
+/* links */
 a, a:hover, a:visited {
-  text-decoration:none;
-  color: blue;
+  text-decoration: underline ;
+  color: var(--link-color);
 }
 
-/* extend syntax highlighting for <pre><code>..code...</code></pre> sections */
-pre code.hljs {
-  display:block;
-  padding: 0 20px;
-  overflow: hidden;;
-  border-radius: 10px;
-}
-
+/* extend code auto blocks */
 code.hljs::before {
-  font-weight: bold;
-  border-bottom: 1px solid white;
+  font-weight: b400;
+  border: 1px solid darkgrey;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   display:block;
-  margin-bottom: 10px;
-  text-align: end;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  color: var(--text-color);
+  background-color: #f9f9f9;
 }
 
 code.language-css::before {
@@ -126,7 +141,7 @@ code.language-css::before {
 }
 
 code.language-javascript::before {
-  content: "JavaScript";
+  content: "JAVASCRIPT";
 }
 
 code.language-xml::before {
@@ -139,13 +154,6 @@ code.language-html::before {
 
 code.language-json::before {
   content: "JSON";
-}
-
-code.hljs::after {
-  content: " ";
-  display:block;
-  margin-top: 20px;
-  border-top: 1px solid white;
 }
 
 /* ----- Tablets ---- */

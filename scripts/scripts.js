@@ -649,6 +649,7 @@ function buildAutoBlocks(main) {
     // add a tl;dr block after the h1 with description
     const tldrBlock = buildBlock('tldr', '');
     document.querySelector('main h1').after(tldrBlock);
+
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

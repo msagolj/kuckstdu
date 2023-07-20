@@ -25,7 +25,6 @@ export default async function decorate(block) {
   // All path classes for filtering in event handler
   const pathClassesFilter = [];
 
-  console.log('hello');
   // set each legend entry
   [...legendEntries].forEach((entry) => {
     // get the current class of the SVG path element

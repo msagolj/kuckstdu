@@ -1,0 +1,27 @@
+.plus-minus.block {
+  display: flex;
+}
+
+.plus-minus.block > div {
+  padding: 1rem 0;
+}
+
+.plus-minus.block > div > div {
+  border-top: 1px solid #aaaa;
+}
+
+.plus-minus.block > div:first-of-type {
+  border-right: 1px solid #aaaa;
+}
+
+.plus-minus.block > div:first-of-type::before {
+  content : '+';
+  font-weight: bold;
+  padding-left: 2rem;
+}
+
+.plus-minus.block > div:nth-of-type(2)::before {
+  content : '- ';
+  font-weight: bold;
+  padding-left: 2rem;
+}
