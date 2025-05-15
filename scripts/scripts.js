@@ -625,13 +625,13 @@ function loadFooter(footer) {
 function buildAutoBlocks(main) {
   try {
     // create an aside element with a sidebar block before main
-    const sidebarAside = document.createElement('aside');
+    /*const sidebarAside = document.createElement('aside');
     sidebarAside.classList.add('sidebar');
     const sidebarBlock = buildBlock('sidebar', '');
     sidebarAside.append(sidebarBlock);
     decorateBlock(sidebarBlock);
     loadBlock(sidebarBlock);
-    main.prepend(sidebarAside);
+    main.prepend(sidebarAside);*/
 
     // create an aside element with a toc block after main
     const tocAside = document.createElement('aside');
